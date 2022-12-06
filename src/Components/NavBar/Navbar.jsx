@@ -1,6 +1,6 @@
 import styles from "./Navbar.module.css";
 
-const Navbar = () => {
+export function Navbar() {
 
   return (
     <header className="sticky-top">
@@ -69,4 +69,3 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;

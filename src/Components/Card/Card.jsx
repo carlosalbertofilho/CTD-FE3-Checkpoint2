@@ -1,6 +1,6 @@
 import styles from "./Card.module.css";
 
-const Card = () => {
+export function Card() {
 
   return (
     <>
@@ -24,4 +24,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+

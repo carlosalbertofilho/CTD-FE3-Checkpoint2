@@ -1,6 +1,6 @@
 import LoginForm from "../Components/LoginForm";
 
-const Contact = () => {
+export const Contact = () => {
   return (
     <>
       <h1>Login</h1>
@@ -8,5 +8,3 @@ const Contact = () => {
     </>
   );
 };
-
-export default Contact;

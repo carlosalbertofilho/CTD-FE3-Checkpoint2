@@ -1,11 +1,9 @@
 import DetailCard from "../Components/DetailCard";
 
-const Detail = () => {
+export const Detail = () => {
   return (
     <>
       <DetailCard />
     </>
   )
 }
-
-export default Detail

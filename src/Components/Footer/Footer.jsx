@@ -1,6 +1,6 @@
 import styles from "./Footer.module.css";
 
-const Footer = () => {
+export function Footer() {
   const scrollToTop = () => {
     window.scrollTo(0, 0)
   }
@@ -31,5 +31,3 @@ const Footer = () => {
     </footer >
   )
 }
-
-export default Footer
