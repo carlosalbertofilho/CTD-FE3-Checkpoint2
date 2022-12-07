@@ -1,7 +1,6 @@
-import "./style.css"
+import "./style.css";
 
 export function Navbar() {
-
   return (
     <header className="sticky-top">
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
@@ -68,4 +67,3 @@ export function Navbar() {
     </header>
   );
 }
-

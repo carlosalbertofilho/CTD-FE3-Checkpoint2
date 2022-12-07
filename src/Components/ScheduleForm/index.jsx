@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import "./style.css"
+import "./style.css";
 
 export function ScheduleForm() {
   useEffect(() => {
@@ -9,7 +9,7 @@ export function ScheduleForm() {
 
   const handleSubmit = (event) => {
     //Nesse handlesubmit você deverá usar o preventDefault,
-    //obter os dados do formulário e enviá-los no corpo da requisição 
+    //obter os dados do formulário e enviá-los no corpo da requisição
     //para a rota da api que marca a consulta
     //lembre-se que essa rota precisa de um Bearer Token para funcionar.
     //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
@@ -19,10 +19,7 @@ export function ScheduleForm() {
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div
-        className={`text-center container}`
-        }
-      >
+      <div className={`text-center container}`}>
         <form onSubmit={handleSubmit}>
           <div className={`row ${styles.rowSpacing}`}>
             <div className="col-sm-12 col-lg-6">
@@ -31,7 +28,10 @@ export function ScheduleForm() {
               </label>
               <select className="form-select" name="dentist" id="dentist">
                 {/*Aqui deve ser feito um map para listar todos os dentistas*/}
-                <option key={'Matricula do dentista'} value={'Matricula do dentista'}>
+                <option
+                  key={"Matricula do dentista"}
+                  value={"Matricula do dentista"}
+                >
                   {`Nome Sobrenome`}
                 </option>
               </select>
@@ -42,7 +42,10 @@ export function ScheduleForm() {
               </label>
               <select className="form-select" name="patient" id="patient">
                 {/*Aqui deve ser feito um map para listar todos os pacientes*/}
-                <option key={'Matricula do paciente'} value={'Matricula do paciente'}>
+                <option
+                  key={"Matricula do paciente"}
+                  value={"Matricula do paciente"}
+                >
                   {`Nome Sobrenome`}
                 </option>
               </select>
@@ -64,11 +67,7 @@ export function ScheduleForm() {
           <div className={`row ${styles.rowSpacing}`}>
             {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-            <button
-              className={`btn btn-light ${styles.button
-                }`}
-              type="submit"
-            >
+            <button className={`btn btn-light ${styles.button}`} type="submit">
               Schedule
             </button>
           </div>
@@ -76,4 +75,4 @@ export function ScheduleForm() {
       </div>
     </>
   );
-};
+}

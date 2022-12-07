@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import {Card} from "../Components/Card/Card";
+import {Card} from "../Components/Card";
 
 const Home = () => {
 
