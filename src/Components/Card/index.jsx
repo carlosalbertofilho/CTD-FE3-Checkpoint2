@@ -1,6 +1,6 @@
 import styles from "./style.css";
 
-export function Card() {
+export const Card = () => {
   return (
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
@@ -23,4 +23,4 @@ export function Card() {
       </div>
     </>
   );
-}
+};

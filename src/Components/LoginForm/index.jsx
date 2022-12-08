@@ -1,6 +1,6 @@
-import "./style.css";
+import styles from "./style.css";
 
-export function LoginForm() {
+const LoginForm = () => {
   const handleSubmit = (e) => {
     //Nesse handlesubmit você deverá usar o preventDefault,
     //enviar os dados do formulário e enviá-los no corpo da requisição
@@ -39,4 +39,5 @@ export function LoginForm() {
       </div>
     </>
   );
-}
+};
+export default LoginForm;
