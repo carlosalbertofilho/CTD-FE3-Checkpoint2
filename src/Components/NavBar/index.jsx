@@ -63,7 +63,7 @@ export function Navbar() {
                                     className={`btn btn-${theme} btnStyle `}
                                     onClick={ () => theme === "dark" ? changeTheme("light") : changeTheme("dark") }
                                 >
-                                     🌙{" "}
+                                    { theme === "dark" ? "🌙" : "☀" }
                                 </button>
                             </li>
                         </ul>
