@@ -1,4 +1,4 @@
-import styles from "./style.css";
+import "./style.css";
 
 const LoginForm = () => {
   const handleSubmit = (e) => {
@@ -15,17 +15,17 @@ const LoginForm = () => {
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div className={`text-center card container ${styles.card}`}>
-        <div className={`card-body ${styles.CardBody}`}>
+      <div className={`text-center card container card`}>
+        <div className={`card-body card-body}`}>
           <form onSubmit={handleSubmit}>
             <input
-              className={`form-control ${styles.inputSpacing}`}
+              className={`form-control inputSpacing`}
               placeholder="Login"
               name="login"
               required
             />
             <input
-              className={`form-control ${styles.inputSpacing}`}
+              className={`form-control inputSpacing}`}
               placeholder="Password"
               name="password"
               type="password"

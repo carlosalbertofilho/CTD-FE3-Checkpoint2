@@ -1,6 +1,6 @@
 import {useEffect} from "react";
 import ScheduleFormModal from "../../Components/ScheduleFormModal";
-import styles from "./style.css";
+import "./style.scss";
 import {useTheme} from "../../hooks/useTheme";
 
 export const DetailCard = () => {
@@ -19,7 +19,7 @@ export const DetailCard = () => {
             <section className="card col-sm-12 col-lg-6 container">
                 {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-                <div className={`card-body row`}>
+                <div className={`card-body row ${theme}`}>
                     <div className="col-sm-12 col-lg-6">
                         <img
                             className="card-img-top"
@@ -43,7 +43,7 @@ export const DetailCard = () => {
                             <button
                                 data-bs-toggle="modal"
                                 data-bs-target="#exampleModal"
-                                className={`btn btn-${theme} ${styles.button}`}
+                                className={`btn btn-${theme} button`}
                             >
                                 Marcar consulta
                             </button>

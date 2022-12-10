@@ -1,5 +1,5 @@
+import "./style.scss"
 import {Link, useParams} from "react-router-dom";
-import "./style.scss";
 import {useTheme} from "../../hooks/useTheme";
 
 export const Card = () => {
@@ -24,6 +24,7 @@ export const Card = () => {
                         <h5 className={`card-title ${theme}`}>
                             Nome e Sobrenome do dentista
                         </h5>
+                        <p>Dentista</p>
                     </Link>
                 </div>
             </div>
