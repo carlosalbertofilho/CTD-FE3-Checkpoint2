@@ -1,13 +1,17 @@
-import { Navbar } from "../NavBar";
-import { Footer } from "../Footer";
-import { Outlet } from "react-router-dom";
+import {Navbar} from "../NavBar";
+import {Footer} from "../Footer";
+import {Outlet} from "react-router-dom";
+import {useTheme} from "../../hooks/useTheme";
 
 export const MainLayout = () => {
-  return (
-    <div className={`main-layout `}>
-      <Navbar />
-      <Outlet />
-      <Footer />
-    </div>
-  );
+
+    const {theme} = useTheme()
+
+    return (
+        <div className={`main-layout ${theme}`}>
+            <Navbar/>
+            <Outlet/>
+            <Footer/>
+        </div>
+    );
 };

@@ -1,14 +1,14 @@
-import {createContext, useContext, useState} from "react";
+import React, {createContext, useContext, useState} from "react";
 
 const ThemeContext = createContext()
 
-export const ThemeProvider = props => {
+export function ThemeProvider(props) {
 
     const themeLocalStorage = localStorage.getItem("theme")
     const [theme, setTheme] = useState(themeLocalStorage === null ? "dark" : themeLocalStorage)
 
 
-    const changeTheme = themeReceived => {
+    function changeTheme(themeReceived) {
 
         if (themeReceived !== theme) {
             setTheme(themeReceived)
@@ -18,13 +18,13 @@ export const ThemeProvider = props => {
     }
 
     return (
-        <ThemeProvider.Provider value={{theme, changeTheme}}>
+        <ThemeContext.Provider value={{theme, changeTheme}}>
             {props.children}
-        </ThemeProvider.Provider>
+        </ThemeContext.Provider>
     )
 
-    export function useTheme() {
-        return useContext(ThemeContext)
-    }
+}
 
+export function useTheme() {
+    return useContext(ThemeContext)
 }
