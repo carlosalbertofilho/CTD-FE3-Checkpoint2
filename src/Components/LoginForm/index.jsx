@@ -1,70 +1,71 @@
 import "./style.scss";
-import {useTheme} from "../../hooks/useTheme";
-import { useState } from "react";
+import { useTheme } from "../../hooks/useTheme";
+import { useEffect, useState } from "react";
 import { Navigate, redirect, useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const handleSubmit = (e) => {
     //Nesse handlesubmit você deverá usar o preventDefault,
     e.preventDefault();
-    validar()
-    setLogin('')
-    setPassword('')
+    validar();
+    setLogin("");
+    setPassword("");
 
     //enviar os dados do formulário e enviá-los no corpo da requisição
-    signUp()
+    signUp();
 
-    if (localStorage.getItem('jwt') !== null) {
-      navigate('/')
-    }
     //para a rota da api que faz o login /auth
+    if (localStorage.getItem("jwt") !== null) {
+      navigate("/");
+    }
     //lembre-se que essa rota vai retornar um Bearer Token e o mesmo deve ser salvo
     //no localstorage para ser usado em chamadas futuras
     //Com tudo ocorrendo corretamente, o usuário deve ser redirecionado a página principal,com react-router
     //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
   };
 
-  const {theme} = useTheme()
+  const { theme } = useTheme();
   const [loginError, setLoginError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
-  const navigate = useNavigate()
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [authToken, setAuthToken] = useState("");
 
   const data = {
     username: login,
-    password: password
-    }
+    password: password,
+  };
 
   const signUp = () => {
-    fetch('https://dhodonto.ctdprojetos.com.br/auth', {
-      method: 'POST', 
+    fetch("https://dhodonto.ctdprojetos.com.br/auth", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (user) {
-      localStorage.setItem('jwt', user.token)
-    });
-  }
+      .then(function (response) {
+        if (response.ok) return response.json();
+        else alert("Credências Inválidas!");
+      })
+      .then(function (user) {
+        setAuthToken(user.token)
+      });
+  };
 
   const validar = () => {
-    if (login.length <= 5) {
-      setLoginError(true)
-    }else {
-      setLoginError(false)
-    }
+    setLoginError(login.length <= 5);
+    setPasswordError(password.length <= 5);
+  };
 
-    if (password.length <= 5) {
-      setPasswordError(true)
-    }else{
-      setPasswordError(false)
-    }
-  }
+  useEffect(() => {
+    validar();
+  }, [login, password]);
+
+  useEffect(() => {
+    if (authToken !== "") localStorage.setItem("jwt", authToken);
+  }, [authToken]);
 
   return (
     <>
@@ -79,23 +80,27 @@ const LoginForm = () => {
               name="login"
               required
               value={login}
-              onChange={event => setLogin(event.target.value)}
+              onChange={(event) => setLogin(event.target.value)}
             />
-            {
-              loginError && (<span>Verifique suas informação novamente</span>)
-            }
+            {loginError && (
+              <span className="alert alert-danger">
+                Login Erro - Verifique suas informação novamente
+              </span>
+            )}
             <input
-              className={`form-control input-login inputSpacing} ${theme}`}
+              className={`form-control input-login inputSpacing ${theme}`}
               placeholder="Password"
               name="password"
               type="password"
               required
               value={password}
-              onChange={event => setPassword(event.target.value)}
+              onChange={(event) => setPassword(event.target.value)}
             />
-            {
-              passwordError && (<span>Verifique suas informação novamente</span>)
-            }
+            {passwordError && (
+              <span className="alert alert-danger">
+                Password Error - Verifique suas informação novamente
+              </span>
+            )}
             <button className="btn btn-primary" type="submit">
               Send
             </button>
