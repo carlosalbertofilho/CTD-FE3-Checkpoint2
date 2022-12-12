@@ -1,25 +1,27 @@
 import { createContext, useContext, useState } from "react";
 
-const AuthContext = createContext();
+const TokenContext = createContext();
 
-export const AuthProvider = (props) => {
+const TokenProvider = (props) => {
   const tokenLocalStorage = localStorage.getItem("jwt");
   const [token, setToken] = useState(
     tokenLocalStorage !== null ? tokenLocalStorage : ""
   );
   const changeToken = (tokenReceived) => {
-    if (tokenReceived !== token) {
+    if ( tokenReceived !== token ) {
       setToken(tokenReceived);
       localStorage.setItem("jwt", tokenReceived);
     }
   };
   return (
-    <AuthContext.Provider value={{ token, changeToken }}>
+    <TokenContext.Provider value={{ token, changeToken }}>
       {props.children}
-    </AuthContext.Provider>
+    </TokenContext.Provider>
   );
 };
 
-export const useToken = () => {
-  return useContext(AuthContext);
+const useToken = () => {
+  return useContext(TokenContext);
 };
+
+export {TokenProvider, useToken};

@@ -1,7 +1,8 @@
 import "./style.scss";
 import { useTheme } from "../../hooks/useTheme";
 import { useEffect, useState } from "react";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useToken } from "../../hooks/useToken";
 
 const LoginForm = () => {
   const handleSubmit = (e) => {
@@ -13,24 +14,16 @@ const LoginForm = () => {
 
     //enviar os dados do formulário e enviá-los no corpo da requisição
     signUp();
-
-    //para a rota da api que faz o login /auth
-    if (localStorage.getItem("jwt") !== null) {
-      navigate("/");
-    }
-    //lembre-se que essa rota vai retornar um Bearer Token e o mesmo deve ser salvo
-    //no localstorage para ser usado em chamadas futuras
-    //Com tudo ocorrendo corretamente, o usuário deve ser redirecionado a página principal,com react-router
-    //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
   };
 
   const { theme } = useTheme();
+  const { token, changeToken } = useToken();
   const [loginError, setLoginError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [authPass, setAuthPass] = useState(false);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [authToken, setAuthToken] = useState("");
 
   const data = {
     username: login,
@@ -50,7 +43,9 @@ const LoginForm = () => {
         else alert("Credências Inválidas!");
       })
       .then(function (user) {
-        setAuthToken(user.token)
+        changeToken(user.token);
+        alert("Login realizado com sucesso!");
+        setAuthPass(true);
       });
   };
 
@@ -64,8 +59,9 @@ const LoginForm = () => {
   }, [login, password]);
 
   useEffect(() => {
-    if (authToken !== "") localStorage.setItem("jwt", authToken);
-  }, [authToken]);
+    //para a rota da api que faz o login /auth
+    if (token !== null && token !== "") navigate("/");
+  }, [authPass]);
 
   return (
     <>
