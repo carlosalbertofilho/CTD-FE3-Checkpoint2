@@ -8,13 +8,16 @@ const TokenProvider = (props) => {
     tokenLocalStorage !== null ? tokenLocalStorage : ""
   );
   const changeToken = (tokenReceived) => {
-    if ( tokenReceived !== token ) {
+    if (tokenReceived !== token) {
       setToken(tokenReceived);
       localStorage.setItem("jwt", tokenReceived);
     }
   };
+  const deleteToken = () => {
+    localStorage.removeItem("jwt");
+  };
   return (
-    <TokenContext.Provider value={{ token, changeToken }}>
+    <TokenContext.Provider value={{ token, changeToken, deleteToken }}>
       {props.children}
     </TokenContext.Provider>
   );
@@ -24,4 +27,4 @@ const useToken = () => {
   return useContext(TokenContext);
 };
 
-export {TokenProvider, useToken};
+export { TokenProvider, useToken };

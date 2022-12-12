@@ -12,6 +12,7 @@ const LoginForm = () => {
     setLogin("");
     setPassword("");
 
+    validar();
     //enviar os dados do formulário e enviá-los no corpo da requisição
     signUp();
   };
@@ -53,10 +54,6 @@ const LoginForm = () => {
     setLoginError(login.length <= 5);
     setPasswordError(password.length <= 5);
   };
-
-  useEffect(() => {
-    validar();
-  }, [login, password]);
 
   useEffect(() => {
     //para a rota da api que faz o login /auth

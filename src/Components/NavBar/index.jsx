@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 import { useTheme } from "../../hooks/useTheme";
+import { useToken } from "../../hooks/useToken";
 
 export function Navbar() {
   const { theme, changeTheme } = useTheme();
+  const { token, deleteToken } = useToken();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    deleteToken();
+    navigate("/login");
+  };
 
   return (
     <header className="sticky-top">
@@ -52,6 +59,21 @@ export function Navbar() {
                   Login
                 </Link>
               </li>
+              {token !== null && token !== "" ? (
+                <>
+                  <li className={`nav-item navBarLink`}>
+                    <span className="nav-link">teste</span>
+                  </li>
+                  <li className={`nav-item navBarLink`}>
+                    <button
+                      className={`btn btn-${theme} btnStyle `}
+                      onClick={ () => handleLogout() }
+                    >
+                      <i className="text-danger">X</i>
+                    </button>
+                  </li>
+                </>
+              ) : null}
               <li className={`nav-item`}>
                 {/* Ao ser clicado, esse botão mudará a aplicação para dark mode ou light mode.
                  Lembre-se de usar um estado no contexto para fazer essa alteração.
