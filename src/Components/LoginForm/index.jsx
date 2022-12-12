@@ -1,6 +1,7 @@
-import "./style.css";
+import "./style.scss";
+import {useTheme} from "../../hooks/useTheme";
 
-export function LoginForm() {
+const LoginForm = () => {
   const handleSubmit = (e) => {
     //Nesse handlesubmit você deverá usar o preventDefault,
     //enviar os dados do formulário e enviá-los no corpo da requisição
@@ -11,21 +12,23 @@ export function LoginForm() {
     //Lembre-se de usar um alerta para dizer se foi bem sucedido ou ocorreu um erro
   };
 
+  const {theme} = useTheme()
+
   return (
     <>
       {/* //Na linha seguinte deverá ser feito um teste se a aplicação
         // está em dark mode e deverá utilizar o css correto */}
-      <div className={`text-center card container ${styles.card}`}>
-        <div className={`card-body ${styles.CardBody}`}>
-          <form onSubmit={handleSubmit}>
+      <div className={`text-center container  form ${theme}`}>
+        <div className={``}>
+          <form className="form-login" onSubmit={handleSubmit}>
             <input
-              className={`form-control ${styles.inputSpacing}`}
+              className={`form-control input-login inputSpacing ${theme}`}
               placeholder="Login"
               name="login"
               required
             />
             <input
-              className={`form-control ${styles.inputSpacing}`}
+              className={`form-control input-login inputSpacing} ${theme}`}
               placeholder="Password"
               name="password"
               type="password"
@@ -39,4 +42,5 @@ export function LoginForm() {
       </div>
     </>
   );
-}
+};
+export default LoginForm;

@@ -1,10 +1,21 @@
-import "./style.css"
-import {Navbar} from "../../Components/NavBar";
-import {Footer} from "../../Components/Footer";
+import { useEffect } from "react";
+import { Card } from "../../Components/Card";
 
-export function Home() {
-    <div className={`main-layout ${theme}`}>
-        <Navbar/>
-        <Footer/>
-    </div>
-}
+export const Home = () => {
+
+    useEffect(() => {
+        //Nesse useEffect, deverá ser obtido todos os dentistas da API
+        //Armazena-los em um estado para posteriormente fazer um map
+        //Usando o componente <Card />
+    }, []);
+
+    return (
+        <>
+            <h1>Home</h1>
+            <div className="card-grid container">
+                <Card />
+            </div>
+        </>
+    );
+};
+

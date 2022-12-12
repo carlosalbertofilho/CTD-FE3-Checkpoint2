@@ -2,7 +2,7 @@ import React from "react";
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
-const Favs = () => {
+export const Favs = () => {
 
   return (
     <>
@@ -15,4 +15,3 @@ const Favs = () => {
   );
 };
 
-export default Favs;
