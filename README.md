@@ -15,7 +15,7 @@ Exame Final de Frontend III
 
 ## Requisitos
 
-É essencial clonar este projeto em um repositório para poder trabalhar. Não serão aceitos projetos que tenham sido realizados sem partir deste modelo.
+É essencial clonar este projeto em um repositório para poder trabalhar. Não serão aceitos projetos que tenham sido realizados sem partir deste modelo..
 
 ```
 # Clone o repositório para o seu computador
