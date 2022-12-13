@@ -1,19 +1,30 @@
-import { useEffect } from "react";
-import { Card } from "../../Components/Card";
+import {useEffect, useState} from "react";
+import {Card} from "../../Components/Card";
 
 export const Home = () => {
+    const [dentist, setDentist] = useState([''])
 
     useEffect(() => {
-        //Nesse useEffect, deverá ser obtido todos os dentistas da API
-        //Armazena-los em um estado para posteriormente fazer um map
-        //Usando o componente <Card />
+        fetch('https://dhodonto.ctdprojetos.com.br/dentista').then(
+            res =>
+                res.json().then(
+                    data =>
+                        setDentist(data)
+                ))
     }, []);
 
     return (
         <>
             <h1>Home</h1>
             <div className="card-grid container">
-                <Card />
+                {
+                    dentist.map((a, index) =>
+                        <Card
+                            key={index}
+                            data={a}
+                        />
+                    )
+                }
             </div>
         </>
     );
