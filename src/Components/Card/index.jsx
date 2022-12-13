@@ -2,9 +2,8 @@ import "./style.scss"
 import {Link, useParams} from "react-router-dom";
 import {useTheme} from "../../hooks/useTheme";
 
-export const Card = () => {
+export const Card = (props) => {
 
-    const {id} = useParams();
     const {theme} = useTheme()
 
     return (
@@ -20,11 +19,11 @@ export const Card = () => {
                 <div className={`card-body ${theme}`}>
                     {/* Na linha seguinte o link deverá utilizar a matricula, nome e sobrenome do dentista
           que vem da API */}
-                    <Link to={`/detail/${id}`}>
+                    <Link to={`/detail/${props.data.matricula}`}>
                         <h5 className={`card-title ${theme}`}>
-                            Nome e Sobrenome do dentista
+                            {props.data.nome}
                         </h5>
-                        <p>Dentista</p>
+                        <p>{props.data.sobrenome}</p>
                     </Link>
                 </div>
             </div>
