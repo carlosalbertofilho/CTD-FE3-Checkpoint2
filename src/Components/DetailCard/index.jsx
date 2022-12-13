@@ -3,7 +3,6 @@ import ScheduleFormModal from "../../Components/ScheduleFormModal";
 import "./style.scss";
 import { useTheme } from "../../hooks/useTheme";
 import { useParams } from "react-router-dom";
-import { useToken } from "../../hooks/useToken";
 
 export const DetailCard = () => {
   const { id } = useParams();
@@ -17,14 +16,10 @@ export const DetailCard = () => {
   }, []);
 
   return (
-    //As instruııes que estıo com {''} precisam ser
-    //substituıdas com as informaııes que vem da api
     <>
       <>
         <h1>Detail about Dentist {dentist.nome} </h1>
         <section className="card col-sm-12 col-lg-6 container">
-          {/* //Na linha seguinte deverı ser feito um teste se a aplicaııo
-        // estÃ¡ em dark mode e deverÃ¡ utilizar o css correto */}
           <div className={`card-body row ${theme}`}>
             <div className="col-sm-12 col-lg-6">
               <img
