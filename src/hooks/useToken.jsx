@@ -15,6 +15,7 @@ const TokenProvider = (props) => {
   };
   const deleteToken = () => {
     localStorage.removeItem("jwt");
+    changeToken(null)
   };
   return (
     <TokenContext.Provider value={{ token, changeToken, deleteToken }}>
