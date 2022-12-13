@@ -1,9 +1,9 @@
-import {DetailCard} from "../../Components/DetailCard";
+import { DetailCard } from "../../Components/DetailCard";
 
 export const Detail = () => {
   return (
     <>
       <DetailCard />
     </>
-  )
-}
+  );
+};
