@@ -8,7 +8,15 @@ const ScheduleForm = () => {
     const navigate = useNavigate();
     const [dentisList, setDentistList] = useState([]);
     const [patientList, setPatientList] = useState([]);
-    const [data, setData] = useState([])
+    const [dentista, setDentista] = useState([])
+    const [paciente, setPaciente] = useState([])
+    const [dataHoraAgendamento, setDataHoraAgendamento] = useState()
+
+    const data = {
+        dentista,
+        paciente,
+        dataHoraAgendamento
+    }
 
     useEffect(() => {
         //Nesse useEffect, você vai fazer um fetch na api buscando TODOS os dentistas
@@ -64,7 +72,7 @@ const ScheduleForm = () => {
                                 Dentist
                             </label>
                             <select className="form-select" name="dentist" id="dentist"
-                                    onChange={e => setData([...data, e.target.value])}
+                                    onChange={e => setDentista(e.target.value)}
                             >
                                 {
                                     /*Aqui deve ser feito um map para listar todos os dentistas*/
@@ -86,7 +94,7 @@ const ScheduleForm = () => {
                                 Patient
                             </label>
                             <select className="form-select" name="patient" id="patient"
-                                    onChange={e => setData([...data, e.target.value])}
+                                    onChange={e => setPaciente(e.target.value)}
                             >
                                 {
                                     /*Aqui deve ser feito um map para listar todos os pacientes*/
@@ -114,7 +122,7 @@ const ScheduleForm = () => {
                                 id="appointmentDate"
                                 name="appointmentDate"
                                 type="datetime-local"
-                                onChange={e => setData([...data, e.target.value])}
+                                onChange={e => setDataHoraAgendamento(e.target.value)}
                             />
                         </div>
                     </div>
