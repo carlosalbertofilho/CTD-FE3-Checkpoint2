@@ -19,14 +19,13 @@ const LoginForm = () => {
   };
 
   const { theme } = useTheme();
-  const { token, changeToken } = useToken();
-  const { clientName, changeClientName } = useClientName();
+  const { changeToken } = useToken();
+  const { changeClientName } = useClientName();
   const [loginError, setLoginError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [authPass, setAuthPass] = useState(false);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [tokenCheck, setTokenCheck] = useState(false);
   const navigate = useNavigate();
 
   const data = {
@@ -58,12 +57,6 @@ const LoginForm = () => {
     setLoginError(login.length <= 5);
     setPasswordError(password.length <= 5);
   };
-
-  useEffect(() => {
-    (token !== null && token !== '')
-      ? setTokenCheck(true)
-      : setTokenCheck(false);
-  });
 
 
   useEffect(() => {
