@@ -7,6 +7,7 @@ import { Favs } from "./Pages/Favs";
 import { Login } from "./Pages/Login";
 import { ThemeProvider } from "./hooks/useTheme";
 import { TokenProvider } from "./hooks/useToken";
+import { ClientNameProvider } from "./hooks/useClientName";
 
 function App() {
   const appRouter = createBrowserRouter([
@@ -40,7 +41,9 @@ function App() {
   return (
     <ThemeProvider>
       <TokenProvider>
-        <RouterProvider router={appRouter} />
+        <ClientNameProvider>
+          <RouterProvider router={appRouter} />
+        </ClientNameProvider>
       </TokenProvider>
     </ThemeProvider>
   );

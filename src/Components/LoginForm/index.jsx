@@ -3,6 +3,7 @@ import { useTheme } from "../../hooks/useTheme";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToken } from "../../hooks/useToken";
+import { useClientName } from "../../hooks/useClientName";
 
 const LoginForm = () => {
   const handleSubmit = (e) => {
@@ -19,11 +20,13 @@ const LoginForm = () => {
 
   const { theme } = useTheme();
   const { token, changeToken } = useToken();
+  const { clientName, changeClientName } = useClientName();
   const [loginError, setLoginError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [authPass, setAuthPass] = useState(false);
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [tokenCheck, setTokenCheck] = useState(false);
   const navigate = useNavigate();
 
   const data = {
@@ -45,6 +48,7 @@ const LoginForm = () => {
       })
       .then(function (user) {
         changeToken(user.token);
+        changeClientName(login);
         alert("Login realizado com sucesso!");
         setAuthPass(true);
       });
@@ -56,8 +60,15 @@ const LoginForm = () => {
   };
 
   useEffect(() => {
+    (token !== null && token !== '')
+      ? setTokenCheck(true)
+      : setTokenCheck(false);
+  });
+
+
+  useEffect(() => {
     //para a rota da api que faz o login /auth
-    if (token !== null && token !== "") navigate("/");
+    if (authPass) navigate("/");
   }, [authPass]);
 
   return (
