@@ -43,11 +43,7 @@ const ScheduleForm = () => {
         if (token === null || token === "") {
             navigate("/login");
         }
-        saveSchedule()
-
-    };
-    const saveSchedule = async () => {
-        const save = await fetch(
+        fetch(
             "https://dhodonto.ctdprojetos.com.br/consulta",
             {
                 method: "POST",
@@ -57,9 +53,17 @@ const ScheduleForm = () => {
                 },
                 body: JSON.stringify(data)
             }
+        ).then(
+            res => {
+                if (res.ok) {
+                    alert("Agendado com sucesso")
+                } else {
+                    alert("Erro ao agendar")
+                }
+                console.log(data)
+            }
         )
-        console.log(data)
-    }
+    };
 
     return (
         <>
