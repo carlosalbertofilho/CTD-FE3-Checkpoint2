@@ -4,7 +4,7 @@ import {useToken} from "../../hooks/useToken";
 import styles from "./style.css";
 
 const ScheduleForm = () => {
-    const token = useToken();
+    const {token} = useToken();
     const navigate = useNavigate();
     const [dentisList, setDentistList] = useState([]);
     const [patientList, setPatientList] = useState([]);
@@ -12,11 +12,6 @@ const ScheduleForm = () => {
     const [paciente, setPaciente] = useState([])
     const [dataHoraAgendamento, setDataHoraAgendamento] = useState()
 
-    const data = {
-        dentista,
-        paciente,
-        dataHoraAgendamento
-    }
 
     useEffect(() => {
         //Nesse useEffect, você vai fazer um fetch na api buscando TODOS os dentistas
@@ -30,8 +25,17 @@ const ScheduleForm = () => {
             .then((res) => res.json())
             .then((data) => setDentistList(data));
 
-        console.log(data)
     }, []);
+
+    const data = {
+        paciente:{
+            matricula: paciente
+        },
+        dentista:{
+            matricula: dentista
+        },
+        dataHoraAgendamento
+    }
 
     const handleSubmit = (event) => {
         //Nesse handlesubmit você deverá usar o preventDefault,
@@ -43,26 +47,27 @@ const ScheduleForm = () => {
         if (token === null || token === "") {
             navigate("/login");
         }
-        fetch(
-            "https://dhodonto.ctdprojetos.com.br/consulta",
-            {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json",
-                    authorization: token
-                },
-                body: JSON.stringify(data)
-            }
-        ).then(
-            res => {
-                if (res.ok) {
-                    alert("Agendado com sucesso")
-                } else {
-                    alert("Erro ao agendar")
-                }
+       fetch(
+           "https://dhodonto.ctdprojetos.com.br/consulta",
+           {
+               method: "POST",
+               headers: {
+                   "Content-type": "application/json",
+                   authorization: `Bearer ${token}`
+               },
+               body: JSON.stringify(data)
+           }
+       ).then(
+           res => {
+               if (res.ok) {
+                   alert("Agendado com sucesso")
+               } else {
+                   alert("Erro ao agendar")
+               }
                 console.log(data)
-            }
-        )
+                console.log(paciente)
+             }
+         )
     };
 
     return (
@@ -78,13 +83,14 @@ const ScheduleForm = () => {
                             <select className="form-select" name="dentist" id="dentist"
                                     onChange={e => setDentista(e.target.value)}
                             >
+                                <option value="" selected disabled hidden>Choose here</option>
                                 {
                                     /*Aqui deve ser feito um map para listar todos os dentistas*/
                                     dentisList.map((dentist) => {
                                         return (
                                             <option
                                                 key={dentist.matricula}
-                                                value={dentist}
+                                                value={dentist.matricula}
                                             >
                                                 {`${dentist.nome} ${dentist.sobrenome}`}
                                             </option>
@@ -100,13 +106,15 @@ const ScheduleForm = () => {
                             <select className="form-select" name="patient" id="patient"
                                     onChange={e => setPaciente(e.target.value)}
                             >
+                                <option value="" selected disabled hidden>Choose here</option>
+
                                 {
                                     /*Aqui deve ser feito um map para listar todos os pacientes*/
                                     patientList.map((patient) => {
                                         return (
                                             <option
                                                 key={patient.matricula}
-                                                value={patient}
+                                                value={patient.matricula}
                                             >
                                                 {`${patient.nome} ${patient.sobrenome}`}
                                             </option>
