@@ -2,15 +2,25 @@ import { Link, useNavigate } from "react-router-dom";
 import "./style.css";
 import { useTheme } from "../../hooks/useTheme";
 import { useToken } from "../../hooks/useToken";
+import { useEffect, useState } from "react";
+import { useClientName } from "../../hooks/useClientName";
 
 export function Navbar() {
   const { theme, changeTheme } = useTheme();
   const { token, deleteToken } = useToken();
+  const { clientName } = useClientName();
+  const [tokenCheck, setTokenCheck] = useState(false);
   const navigate = useNavigate();
   const handleLogout = () => {
     deleteToken();
     navigate("/login");
   };
+
+  useEffect(() => {
+    (token !== null && token !== '')
+      ? setTokenCheck(true)
+      : setTokenCheck(false);
+  },[token]);
 
   return (
     <header className="sticky-top">
@@ -59,17 +69,19 @@ export function Navbar() {
                   Login
                 </Link>
               </li>
-              {token !== null && token !== "" ? (
+              {tokenCheck ? (
                 <>
                   <li className={`nav-item navBarLink`}>
-                    <span className="nav-link">teste</span>
+                    <span className="nav-link">
+                      { clientName }
+                    </span>
                   </li>
                   <li className={`nav-item navBarLink`}>
                     <button
                       className={`btn btn-${theme} btnStyle `}
-                      onClick={ () => handleLogout() }
+                      onClick={() => handleLogout()}
                     >
-                      <i className="text-danger">X</i>
+                      <div className="text-danger">❎</div>
                     </button>
                   </li>
                 </>

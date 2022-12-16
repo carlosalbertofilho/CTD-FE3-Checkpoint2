@@ -3,6 +3,7 @@ import { useTheme } from "../../hooks/useTheme";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToken } from "../../hooks/useToken";
+import { useClientName } from "../../hooks/useClientName";
 
 const LoginForm = () => {
   const handleSubmit = (e) => {
@@ -18,7 +19,8 @@ const LoginForm = () => {
   };
 
   const { theme } = useTheme();
-  const { token, changeToken } = useToken();
+  const { changeToken } = useToken();
+  const { changeClientName } = useClientName();
   const [loginError, setLoginError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [authPass, setAuthPass] = useState(false);
@@ -45,6 +47,7 @@ const LoginForm = () => {
       })
       .then(function (user) {
         changeToken(user.token);
+        changeClientName(login);
         alert("Login realizado com sucesso!");
         setAuthPass(true);
       });
@@ -55,9 +58,10 @@ const LoginForm = () => {
     setPasswordError(password.length <= 5);
   };
 
+
   useEffect(() => {
     //para a rota da api que faz o login /auth
-    if (token !== null && token !== "") navigate("/");
+    if (authPass) navigate("/");
   }, [authPass]);
 
   return (
